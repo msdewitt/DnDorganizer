@@ -3,13 +3,14 @@ package msdewitt.dnDOrganizer.View;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import msdewitt.dnDOrganizer.Model.NPCList;
 import msdewitt.dnDOrganizer.Model.NPCStats;
 import msdewitt.dnDOrganizer.Model.NonPlayerCharacter;
 
@@ -19,7 +20,8 @@ public class CampainInterface extends Application{
 	NPCStats stats = new NPCStats(11,10,14,13,16,17);
 	NonPlayerCharacter npc = new NonPlayerCharacter("Jerry", 20, "Male", stats);
 	nPCInterface npcView = new nPCInterface(npc);
-	GridPane npcPane = npcView.buildInterface();
+	npcListView npcListView = new npcListView(npcView, new NPCList(npc));
+	FlowPane npcPane = npcListView.buildInterface();
 
 	
 
@@ -50,10 +52,7 @@ public class CampainInterface extends Application{
 					primaryPane.getChildren().remove(closeButton);
 					primaryPane.getChildren().remove(npcPane);
 				}
-				
 			});
-			
-				
 			}
 			
 		});

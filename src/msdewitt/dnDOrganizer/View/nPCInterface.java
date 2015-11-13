@@ -1,5 +1,6 @@
 package msdewitt.dnDOrganizer.View;
 
+
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -11,21 +12,15 @@ public class nPCInterface {
 	NonPlayerCharacter npc;
 
 	public nPCInterface(NonPlayerCharacter npc){
-
 		this.npc = npc;
+		
 	}
-	public GridPane buildInterface(){
-		GridPane grid = new GridPane();
-		grid.add(buildNPC(), 0, 0);
-		grid.setPrefSize(300.0, 300.0);
-		return grid;
-	}
-	private GridPane buildNPC() {
+	public GridPane buildNPC() {
 		GridPane pane = new GridPane();
 		Insets insets = new Insets(INSETS,INSETS,INSETS,INSETS);
 		Label nPCInfo = new Label("Name: " + npc.getName() + "\nAge: "+ //
 		String.valueOf(npc.getAge()) + "\nGender: " + npc.getGender());
-		pane.add(nPCInfo,0,2);
+		pane.add(nPCInfo,0,0);
 		buildStats(pane);
 		pane.setPadding(insets);
 		return pane;
@@ -37,7 +32,7 @@ public class nPCInterface {
 				String.valueOf("Wis: " + npc.getStats().getWisdom())+ " " + //
 				String.valueOf("Int: " + npc.getStats().getIntelligence()) + " " + //
 				String.valueOf("Cha: " + npc.getStats().getCharisma()));
-		pane.add(npcStats, 0, 3);
+		pane.add(npcStats, 0, 1);
 
 		
 	}
