@@ -1,7 +1,13 @@
 package msdewitt.dnDOrganizer.View;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ToolBar;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import msdewitt.dnDOrganizer.Model.NPCStats;
@@ -9,18 +15,48 @@ import msdewitt.dnDOrganizer.Model.NonPlayerCharacter;
 
 public class CampainInterface extends Application{
 	
-	GridPane primaryPane = new GridPane();
+	BorderPane primaryPane = new BorderPane();
 	NPCStats stats = new NPCStats(11,10,14,13,16,17);
 	NonPlayerCharacter npc = new NonPlayerCharacter("Jerry", 20, "Male", stats);
 	nPCInterface npcView = new nPCInterface(npc);
+	GridPane npcPane = npcView.buildInterface();
+
+	
+
 
 	public static void main(String[]args){
 		Application.launch(CampainInterface.class, args);
 	}
 	
 	public void start(Stage primaryStage){
+		Button button = new Button();
+		ToolBar toolBar = new ToolBar(button);
 		configure(primaryStage);
-		primaryPane.add(npcView.buildInterface(), 0, 1);
+		button.setText("List of NPC's");
+		primaryPane.setPrefSize(400.0, 300.0);
+		primaryPane.setTop(toolBar);
+		button.setOnAction(new EventHandler<ActionEvent>(){
+
+			@Override
+			public void handle(ActionEvent event) {
+			Button closeButton = new Button();
+			closeButton.setText("Close");
+			primaryPane.setCenter(npcPane);
+			primaryPane.setBottom(closeButton);
+			closeButton.setOnAction(new EventHandler<ActionEvent>(){
+
+				@Override
+				public void handle(ActionEvent event) {
+					primaryPane.getChildren().remove(closeButton);
+					primaryPane.getChildren().remove(npcPane);
+				}
+				
+			});
+			
+				
+			}
+			
+		});
 		primaryStage.show();
 	}
 
